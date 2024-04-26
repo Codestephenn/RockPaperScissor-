@@ -32,7 +32,7 @@ function playGame() {
   let playerScore = 0;
   let computerScore = 0;
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     let playerSelection;
     let validInput = false;
 
