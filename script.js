@@ -3,6 +3,7 @@ let scoresEl = document.getElementById("scores-el");
 const buttons = document.querySelectorAll("button");
 const cancelBtn = document.getElementById("cancel-btn");
 const restartBtn = document.getElementById("restart-btn");
+const roundPlayed = document.getElementById("round-played")
 let playerScore = 0;
 let computerScore = 0;
 let roundsPlayed = 0;
@@ -26,24 +27,29 @@ function playGame(){
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
     messageEl.textContent = "It's a tie!";
+    messageEl.style.color = "brown"
   } else if (
     (playerSelection === "rock" && computerSelection === "scissors") ||
     (playerSelection === "paper" && computerSelection === "rock") ||
     (playerSelection === "scissors" && computerSelection === "paper")
   ) {
     messageEl.textContent = `You win! ${playerSelection} beats ${computerSelection}.`;
+    messageEl.style.color = "green"
     playerScore++; // Increment player score
+    
   } else {
+    messageEl.style.color = "red"
     messageEl.textContent = `You lose! ${computerSelection} beats ${playerSelection}.`;
     computerScore++; // Increment computer score
   }
   roundsPlayed++; // Increment rounds played
+  roundPlayed.textContent =`Round Played: ${roundsPlayed}/10`;
   updateScores();
 }
 
 // Function to update scores display
 function updateScores() {
-  scoresEl.textContent = `Current Scores - Player: ${playerScore} Computer: ${computerScore}`;
+  scoresEl.textContent = `Scores Board- Player: ${playerScore} Computer: ${computerScore}`;
   if (roundsPlayed === 10) {
     endGame();
   }
@@ -52,11 +58,14 @@ function updateScores() {
 // Function to end the game
 function endGame() {
   if (playerScore > computerScore) {
-    messageEl.textContent = "You win the game!";
+    messageEl.textContent = " Congratulations, you win the game!";
+    messageEl.style.color = "green"
   } else if (playerScore < computerScore) {
-    messageEl.textContent = "You lose the game!";
+    messageEl.textContent = " Sorry, you lose the game!";
+    messageEl.style.color = "red"
   } else {
     messageEl.textContent = "It's a tie!";
+    messageEl.style.color = "brown"
   }
   disableButtons();
   
@@ -94,7 +103,8 @@ function restartGame() {
   computerScore = 0;
   roundsPlayed = 0;
   messageEl.textContent = "";
-  scoresEl.textContent = "";
+  scoresEl.textContent = "Scores Board- Player: 0 Computer: 0"
+  roundPlayed.textContent =`Round Played: ${roundsPlayed}/10`;
   
 }
 
